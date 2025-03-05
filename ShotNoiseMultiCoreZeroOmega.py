@@ -48,11 +48,11 @@ def checkInit():
             answer = int(input("Zero Temperature(1) or Finite Temperature(0): "))
             if answer == 1:
                 saddleFile = const.saddlePointFile
-                shotFile = const.shotNoiseFile
+                shotFile = const.shotNoiseZeroFile
                 boolInit = False
             elif answer == 0:
                 saddleFile = const.saddlePointFileTvalue
-                shotFile = const.shotNoiseFileTvalue
+                shotFile = const.shotNoiseFileZeroTvalue
                 boolInit = False
             else:
                 pass
@@ -183,26 +183,7 @@ if __name__ == '__main__':
     ####! compute the bosonic Green Functions
     
     ####* Parameters
-    nb_cores = 9
-    
-    # omegaSpace = np.linspace(-1e-3, 1e-3, 2)
-    # epsilonSpace = np.linspace(-const.epsilonDOS, const.epsilonDOS, const.nbDOS_shotNoise)
-    # # epsilonSpace = np.linspace(-const.epsilonDOS, const.epsilonDOS, 100)
-    
-    # # voltageSpace = np.linspace(1e-4, 1.7, 60)
-    
-    # voltageSpaceL = np.linspace(1e-4, 1.25, 40)
-    # voltageSpaceC = np.linspace(1.25, 1.55, 15)
-    # voltageSpaceR = np.linspace(1.55, 1.7, 5)
-    
-    # voltageSpace = np.unique(np.concatenate((voltageSpaceL, voltageSpaceC, voltageSpaceR)))
-    
-    # # voltageSpaceLeft = np.linspace(0.0, voltageCriticalPoint-0.2, 10)
-    # # voltageSpaceRight = np.linspace(voltageCriticalPoint+0.2, voltageSpacePlot[-1], 10)
-    # # volatgeSpaceCenter = np.linspace(voltageCriticalPoint-0.2, voltageCriticalPoint+0.2, 30)
-    # # voltageSpace = np.unique(np.concatenate((voltageSpaceLeft, volatgeSpaceCenter, voltageSpaceRight)))
-    
-    # # voltageSpace = np.linspace(voltageCriticalPoint, voltageCriticalPoint+0.5, 120)
+    nb_cores = const.nb_cores
     
     omegaSpace = const.omegaSpaceZero
     epsilonSpace = np.linspace(-const.epsilonDOS, const.epsilonDOS, const.nbDOS_shotNoise)
@@ -221,7 +202,14 @@ if __name__ == '__main__':
     
     for i in range(voltageSpace.shape[0]):
         vecPiR = Susceptv2.computePiR(omegaSpace, lambdaUpper, phi_voltage_func(voltageSpace[i]), voltageSpace[i], couplingValue, Tvalue=Tvalue)
-        vecPiK = Susceptv2.computePiK(omegaSpace, lambdaUpper, phi_voltage_func(voltageSpace[i]), voltageSpace[i], couplingValue, Tvalue=Tvalue)
+        # vecPiK = Susceptv2.computePiK(omegaSpace, lambdaUpper, phi_voltage_func(voltageSpace[i]), voltageSpace[i], couplingValue, Tvalue=Tvalue)
+        
+        if Tvalue < const.Tvalue_ref:
+            vecPiK = Susceptv2.computePiK(omegaSpace, lambdaUpper, phiSpace[i], voltageSpace[i], couplingValue, Tvalue=Tvalue)
+        else:
+            vecPiK = Susceptv2.computePiKnum(omegaSpace, lambdaUpper, phiSpace[i], voltageSpace[i], couplingValue, Tvalue=Tvalue)
+        
+        
         
         vecDR = np.reciprocal(-2.0*lambdaUpper + vecPiR)
         vecDK = Susceptv2.computeDKfunc(lambdaUpper, vecPiK, vecPiR)

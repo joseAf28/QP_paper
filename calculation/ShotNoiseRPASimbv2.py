@@ -19,7 +19,7 @@ sys.path.append(mf_path)
 import Constants as const
 
 
-Tvalue_ref = 1e-6
+Tvalue_ref = 1e-5
 
 ##? Auxiliar functions
 def Impy(z, zp, beta, mu): 
@@ -39,6 +39,8 @@ def greenLeadsRetarded(omega, couplingValue):
 
 def greenLeadsKeldysh(omega, couplingValue, voltageValue, Tvalue = 1e-5):
     beta2 = 0.5/Tvalue
+    
+    # return -1j*couplingValue*np.sign(omega - voltageValue/2.0)
     
     if Tvalue < Tvalue_ref:
         return -1j*couplingValue*np.sign(omega - voltageValue/2.0)
@@ -63,6 +65,8 @@ def greenKeldysh(epsilon, omega, lambdaValue, phiValue, voltageValue, couplingVa
         num = -1j*couplingValue*(np.sign(omega - voltageValue/2.0) + np.sign(omega + voltageValue/2.0))
     else:
         num = -1j*couplingValue*(np.tanh(0.5*beta*(omega - voltageValue/2.0)) + np.tanh(0.5*beta*(omega + voltageValue/2.0)))
+    
+    # num = -1j*couplingValue*(np.sign(omega - voltageValue/2.0) + np.sign(omega + voltageValue/2.0))
     
     den = (omega - epsilon + 2.0*lambdaValue*phiValue)**2 + couplingValue**2
     return num*np.reciprocal(den)

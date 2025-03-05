@@ -183,25 +183,12 @@ if __name__ == '__main__':
     ####! compute the bosonic Green Functions
     
     ####* Parameters
-    # nb_cores = 9
-    
-    # omegaSpaceLeft =np.linspace(-6.0, -2.5, 5)
-    # omegaSpaceRight = np.linspace(2.5, 6.0, 5)
-    
-    # omegaSpaceCenterL = np.linspace(-2.5, -1.1e-2, 20)
-    # omegaSpaceCenterC = np.linspace(-1e-2, 1e-2, 6)
-    # omegaSpaceCenterR = np.linspace(1.1e-2, 2.5, 20)
-    # omegaSpaceCenter = np.unique(np.concatenate([omegaSpaceCenterL, omegaSpaceCenterC, omegaSpaceCenterR]))
-    
-    # omegaSpace = np.unique(np.concatenate([omegaSpaceLeft, omegaSpaceCenter, omegaSpaceRight]))
-    
-    # epsilonSpace = np.linspace(-const.epsilonDOS, const.epsilonDOS, 9)
-    # # epsilonSpace = np.linspace(-const.epsilonDOS, const.epsilonDOS, 100)
-    
     
     nb_cores = const.nb_cores
     omegaSpace = const.omegaSpace
     epsilonSpace = np.linspace(-const.epsilonDOS, const.epsilonDOS, const.nbDOS_shotNoise)
+    
+    ####? Check
     
     voltageSpace = np.array([voltageZeroPoint, voltageLowerPoint, voltageCriticalPoint, voltageUpperPoint])
     phiSpace = np.array([phiZero, phiLower, phiCritical, phiUpper])
@@ -218,7 +205,11 @@ if __name__ == '__main__':
     
     for i in range(voltageSpace.shape[0]):
         vecPiR = Susceptv2.computePiR(omegaSpace, lambdaUpper, phiSpace[i], voltageSpace[i], couplingValue, Tvalue=Tvalue)
-        vecPiK = Susceptv2.computePiK(omegaSpace, lambdaUpper, phiSpace[i], voltageSpace[i], couplingValue, Tvalue=Tvalue)
+        
+        if Tvalue < const.Tvalue_ref:
+            vecPiK = Susceptv2.computePiK(omegaSpace, lambdaUpper, phiSpace[i], voltageSpace[i], couplingValue, Tvalue=Tvalue)
+        else:
+            vecPiK = Susceptv2.computePiKnum(omegaSpace, lambdaUpper, phiSpace[i], voltageSpace[i], couplingValue, Tvalue=Tvalue)
         
         vecDR = np.reciprocal(-2.0*lambdaUpper + vecPiR)
         vecDK = Susceptv2.computeDKfunc(lambdaUpper, vecPiK, vecPiR)
