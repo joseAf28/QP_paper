@@ -47,46 +47,9 @@ TvalueShotNoiseRPA = Tvalue
 nb_cores = 9
 nbDOS_shotNoise = 100 # or 100
 
-
-omegaSpaceZero = np.linspace(-1e-3, 1e-3, 2)
-
-# voltageSpaceL = np.linspace(1e-4, 1.25, 45)
-# voltageSpaceC = np.linspace(1.25, 1.55, 20)
-# voltageSpaceR = np.linspace(1.55, 2.0, 10)
-# voltageSpaceZero = np.unique(np.concatenate((voltageSpaceL, voltageSpaceC, voltageSpaceR)))
-
+omegaSpaceZero = np.logspace(-4.0, 3.0, 100)
 voltageSpaceZero = np.linspace(1e-4, 1.9, 150)
-
-
-# omegaSpaceLeft =np.linspace(-6.0, -2.5, 8)
-# omegaSpaceRight = np.linspace(2.5, 6.0, 8)
-
-# omegaSpaceCenterL = np.linspace(-2.5, -1.1e-2, 30)
-# omegaSpaceCenterC = np.linspace(-1e-2, 1e-2, 2)
-# omegaSpaceCenterR = np.linspace(1.1e-2, 2.5, 30)
-# omegaSpaceCenter = np.unique(np.concatenate([omegaSpaceCenterL, omegaSpaceCenterC, omegaSpaceCenterR]))
-
-# omegaSpace = np.unique(np.concatenate([omegaSpaceLeft, omegaSpaceCenter, omegaSpaceRight]))
-
-
-
-# omegaSpaceLeft =np.linspace(-6.0, -2.5, 10)
-# omegaSpaceRight = np.linspace(2.5, 6.0, 10)
-
-# # omegaSpaceCenterL = np.linspace(-2.5, -1.5e-2, 20)
-# # omegaSpaceCenterC = np.linspace(-1e-3, 1e-3, 2)
-# # omegaSpaceCenterR = np.linspace(1.5e-2, 2.5, 20)
-# # omegaSpaceCenter = np.unique(np.concatenate([omegaSpaceCenterL, omegaSpaceCenterC, omegaSpaceCenterR]))
-
-# omegaSpaceCenter = np.linspace(-2.5, 2.5, 41)
-
-
-# omegaSpace = np.unique(np.concatenate([omegaSpaceLeft, omegaSpaceCenter, omegaSpaceRight]))
-
-omegaSpace = np.linspace(-1e-3, 1e-3, 2)
-
-# omegaSpace = np.linspace(-1e-3, 1e-3, 41)
-
+omegaSpace = np.logspace(-4.0, 3.0, 100)
 
 Tvalue_ref = 5e-5
 

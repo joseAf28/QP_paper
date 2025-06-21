@@ -268,11 +268,11 @@ def RetardedNonIntOrder2(epsilon, omega, lambdaValue, phiValue, voltageValue, co
     SintegrandPlus = lambda nu, omega: Sintegrand2(nu, omega) + Sintegrand2_2(nu, omega)
     SintegrandMinus = lambda nu, omega: - Sintegrand3(nu, omega) - Sintegrand4(nu, omega)
 
-    SintRealPlus = scipy.integrate.quad(lambda nu1: SintegrandPlus(nu1, omega).real, -np.inf, np.inf, limit=500)
-    SintImagPlus = scipy.integrate.quad(lambda nu1: SintegrandPlus(nu1, omega).imag, -np.inf, np.inf, limit=500)
+    SintRealPlus = scipy.integrate.quad(lambda nu1: SintegrandPlus(nu1, omega).real, -np.inf, np.inf, limit=1000)
+    SintImagPlus = scipy.integrate.quad(lambda nu1: SintegrandPlus(nu1, omega).imag, -np.inf, np.inf, limit=1000)
     
-    SintRealMinus = scipy.integrate.quad(lambda nu1: SintegrandMinus(nu1, omega).real, -np.inf, np.inf, limit=500)
-    SintImagMinus = scipy.integrate.quad(lambda nu1: SintegrandMinus(nu1, omega).imag, -np.inf, np.inf, limit=500)
+    SintRealMinus = scipy.integrate.quad(lambda nu1: SintegrandMinus(nu1, omega).real, -np.inf, np.inf, limit=1000)
+    SintImagMinus = scipy.integrate.quad(lambda nu1: SintegrandMinus(nu1, omega).imag, -np.inf, np.inf, limit=1000)
     
     return (SintRealPlus[0] + SintRealMinus[0]) + 1j*(SintImagPlus[0] + SintImagMinus[0])
 
@@ -665,6 +665,7 @@ def shotNoiseInt(DR, DK, epsilonSpace, omegaSpace, lambdaValue, phiValue, voltag
     TclFunc = lambda omega: TclFuncReal(omega) + 1j*TclFuncImag(omega)
     TqFunc = lambda omega: TqFuncReal(omega) + 1j*TqFuncImag(omega)
     KqFunc = lambda omega: KqFuncReal(omega) + 1j*KqFuncImag(omega)
+    
     DRFunc = lambda omega: DRFuncReal(omega) + 1j*DRFuncImag(omega)
     DAFunc = lambda omega: DRFuncReal(omega) - 1j*DRFuncImag(omega)
 
@@ -679,7 +680,6 @@ def shotNoiseInt(DR, DK, epsilonSpace, omegaSpace, lambdaValue, phiValue, voltag
     def SKfunc(omega, lambdaValue):
         ###! check missing 2
         DK = 2*DKFunc(omega)
-
         value1 = DK*TclFunc(omega)*TclFunc(-omega)
         value2 = DRFunc(omega)*TclFunc(omega)*TqFunc(-omega)
         value3 = DRFunc(-omega)*TclFunc(-omega)*TqFunc(omega)

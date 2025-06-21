@@ -96,9 +96,15 @@ def computeMeanField(lambdaConstant, phiFieldInit, voltageValue, Tvalue, ImpyFun
 
     return diffPhiValue
 
-
-computeMFBeta = lambda TValue, lambdaHam, phiFieldInit, voltageValue, ImpyFunc :computeMeanField(lambdaHam, phiFieldInit, voltageValue, TValue, ImpyFunc)
-
 computeMFLambda = lambda phiFieldInit, lambdaHam, voltageValue, TValue, ImpyFunc, couplingConstant: computeMeanField(lambdaHam, phiFieldInit, voltageValue, TValue, ImpyFunc, couplingConstant)
 
 computeMFCoupling = lambda couplingConstant, lambdaHam, phiFieldInit, voltageValue, TValue, ImpyFunc: computeMeanField(lambdaHam, phiFieldInit, voltageValue, TValue, ImpyFunc, couplingConstant)
+
+
+
+### Poorly defined
+
+computeMFBeta = lambda TValue, lambdaHam, phiFieldInit, voltageValue, ImpyFunc, couplingConstant :computeMeanField(lambdaHam, phiFieldInit, voltageValue, TValue, ImpyFunc, couplingConstant)
+
+
+computeMFVoltage = lambda voltageValue, lambdaHam, phiFieldInit, TValue, ImpyFunc, couplingConstant: computeMeanField(lambdaHam, phiFieldInit, voltageValue, TValue, ImpyFunc, couplingConstant)
