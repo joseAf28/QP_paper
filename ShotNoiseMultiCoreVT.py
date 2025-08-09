@@ -64,9 +64,6 @@ def mainShotCalcOmegaNonInt(domain, domainOmega, domainEpsilon, workerIdx):
                 
                 if workerIdx == 0:
                     pbar.update(1)
-        
-            shotKeldyshNonInt[i, j]
-            shotRetardedNonInt[i, j]
     
     
     if workerIdx == 0:
@@ -119,8 +116,8 @@ if __name__ == '__main__':
     
     ##! Initial Setup
     checkInit()
-    saddleFile = "VT-space.hdf5"
-    shotFile = "CurrentNoiseVT_results.hdf5"
+    saddleFile = "h5_output_data/VT-space_lowV_V2.hdf5"
+    shotFile = "h5_output_data/CurrentNoiseVT_results_lowV_V2.hdf5"
     
     ##! Read data from the hdf5 file
     with h5py.File(saddleFile, 'r') as f:
@@ -130,6 +127,7 @@ if __name__ == '__main__':
     
     ####* Parameters
     omegaSpace = np.array([-1e-3, 1e-5, 1e-3])
+    # omegaSpace = np.array([-1e-4, 1e-4])
     # epsilonSpace = np.linspace(-const.epsilonDOS, const.epsilonDOS, 5)
     epsilonSpace = np.linspace(-const.epsilonDOS, const.epsilonDOS, const.nbDOS_shotNoise)
     

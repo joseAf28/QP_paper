@@ -18,7 +18,7 @@ shotNoiseFileZeroTvalue = "resultsShotNoiseZeroV2Tvalue2-2.h5"
 modeFindRoot = 'lambda' # 'phi', 'lambda' 
 
 ##! Energy Levels and DOS functions for the Quantum Dot
-DOSfunc = 'uniform' # 'uniform',  'lorentzian',  'gaussianMod', 'levels' 
+DOSfunc = 'levels' # 'uniform',  'lorentzian',  'gaussianMod', 'levels' 
 
 
 ##* Default values for the functions. They are overwritten by the values in the .ipynb files
@@ -28,7 +28,7 @@ nuDOS = 1           # Gaussian DOS
 sigmaDOS = 1.0      # Gaussian DOS
 epsilonDOS = 1.0    # Bilevel DOS and Linear DOS - 0.5 seems better than 1.0
 
-nbDOS = 10
+nbDOS = 100
 
 couplingConstant = 0.7 # Default value for the coupling constant
 

@@ -79,7 +79,7 @@ if __name__ == '__main__':
     
     ##! Initial Setup
     checkInit()
-    shotFile = "resultsCurrentNoiseNonIntV2.h5"
+    shotFile = "h5_output_data/resultsCurrentNoiseNonIntV2.h5"
     
     lambdaValue = 0.0
     # omegaSpace =  np.logspace(-4.0, 3.0, 100)

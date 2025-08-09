@@ -119,7 +119,7 @@ if __name__ == '__main__':
     
     ##! Initial Setup
     checkInit()
-    shotFile = "resultsCurrentNoiseIntV2.hdf5"
+    shotFile = "h5_output_data/resultsCurrentNoiseIntV2.hdf5"
     
     
     nb_cores = 9
@@ -143,7 +143,7 @@ if __name__ == '__main__':
     
     
     ####! Zero Temperature case
-    Tvalue = 1e-5
+    Tvalue = 5e-3
     couplingValue = 0.7
     voltageSpace = np.array([0.0, 1.0782277033434142, 1.428227703343414, 1.778227703343414])
     lambdaValue = 1.0
