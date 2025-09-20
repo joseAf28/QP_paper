@@ -18,7 +18,7 @@ shotNoiseFileZeroTvalue = "resultsShotNoiseZeroV2Tvalue2-2.h5"
 modeFindRoot = 'lambda' # 'phi', 'lambda' 
 
 ##! Energy Levels and DOS functions for the Quantum Dot
-DOSfunc = 'levels' # 'uniform',  'lorentzian',  'gaussianMod', 'levels' 
+DOSfunc = 'uniform' # 'uniform',  'lorentzian',  'gaussianMod', 'levels' 
 
 
 ##* Default values for the functions. They are overwritten by the values in the .ipynb files

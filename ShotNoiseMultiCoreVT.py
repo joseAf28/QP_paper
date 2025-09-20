@@ -116,8 +116,8 @@ if __name__ == '__main__':
     
     ##! Initial Setup
     checkInit()
-    saddleFile = "h5_output_data/VT-space_lowV_V2.hdf5"
-    shotFile = "h5_output_data/CurrentNoiseVT_results_lowV_V2.hdf5"
+    saddleFile = "h5_output_data/VT-space_lowV_V2_extra.hdf5"
+    shotFile = "h5_output_data/CurrentNoiseVT_results_lowV_V2_extra.hdf5"
     
     ##! Read data from the hdf5 file
     with h5py.File(saddleFile, 'r') as f:
@@ -126,8 +126,8 @@ if __name__ == '__main__':
         DKDataOne = f['VTSpace/DKDataOne'][:]
     
     ####* Parameters
-    omegaSpace = np.array([-1e-3, 1e-5, 1e-3])
-    # omegaSpace = np.array([-1e-4, 1e-4])
+    # omegaSpace = np.array([-1e-3, 1e-5, 1e-3])
+    omegaSpace = np.array([-1e-4, 1e-4])
     # epsilonSpace = np.linspace(-const.epsilonDOS, const.epsilonDOS, 5)
     epsilonSpace = np.linspace(-const.epsilonDOS, const.epsilonDOS, const.nbDOS_shotNoise)
     
@@ -149,7 +149,7 @@ if __name__ == '__main__':
     ##! MultiProcessing
     executor = concurrent.futures.ProcessPoolExecutor(max_workers=nb_cores)
     
-    resultsIterNonIntZero = executor.map(mainShotCalcOmegaNonInt, domainEachCoreZero, domainOmegaEachCoreNonInt, epsilonSpaceEachCore, indexWorkers)
+    # resultsIterNonIntZero = executor.map(mainShotCalcOmegaNonInt, domainEachCoreZero, domainOmegaEachCoreNonInt, epsilonSpaceEachCore, indexWorkers)
     resultsIterNonIntOne = executor.map(mainShotCalcOmegaNonInt, domainEachCoreOne, domainOmegaEachCoreNonInt, epsilonSpaceEachCore, indexWorkers)
     resultsIterRPAOne = executor.map(mainShotCalcOmegaRPA, domainEachCoreOne, domainOmegaEachCoreInt, epsilonSpaceEachCore, DRdataEachCoreOne, DKdataEachCoreOne, indexWorkers)
     
@@ -165,9 +165,9 @@ if __name__ == '__main__':
     shotKeldyshIntOne = np.zeros((domain.shape[0], omegaSpace.shape[0]), dtype=complex)
     
     
-    for result in resultsIterNonIntZero:
-        shotRetardedNonIntZero[:, :] += result[0]
-        shotKeldyshNonIntZero[:, :] += result[1]
+    # for result in resultsIterNonIntZero:
+    #     shotRetardedNonIntZero[:, :] += result[0]
+    #     shotKeldyshNonIntZero[:, :] += result[1]
     for result in resultsIterNonIntOne:
         shotRetardedNonIntOne[:, :] += result[0]
         shotKeldyshNonIntOne[:, :] += result[1]
